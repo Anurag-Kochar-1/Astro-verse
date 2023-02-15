@@ -1,13 +1,19 @@
+import React, {useEffect} from 'react'
 import { useRouter } from 'next/router'
-import React from 'react'
 
 const Index = () => {
+
+  useEffect(() => {
+    router.push(`/subject/space_2/lesson/lbdhXTAbh81xU1x5iwY0`)
+  }, [])
+  
+
     const router = useRouter()
     const {subject} = router.query
   return (
-    <div>
-        {subject}
-    </div>
+    <span>
+        PAGE NOT FOUND.... REDIRECTIN TO LESSON PAGE
+    </span>
   )
 }
 

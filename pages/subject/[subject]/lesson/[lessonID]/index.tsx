@@ -146,9 +146,22 @@ const Index = ({ lessonData, lessonTestsData, lessonFirstTestQuestionsAndAnswers
                         ) : (
                             <div className='flex justify-center items-center w-10 h-10 rounded-full bg-Darkest'>
                                 <RxCross1 className='w-6 h-6 text-white  hover:cursor-pointer' onClick={() => setIsHamBurgerMenuVisible(!isHamBurgerMenuVisible)} />
+
                             </div>
                         )}
+
                     </div>
+                    {/* LOGO */}
+                    <Link href={`/`} className="flex flex-col space-y-4 justify-start items-center">
+                        <Image
+                            src={logoOne}
+                            alt="logo"
+                            width={100}
+                            height={100}
+                            className="w-20 h-20 rounded-md"
+                        />
+                        <h1 className='text-Dark font-extrabold text-3xl font-nunito text-center'> Astro Verse </h1>
+                    </Link>
 
                     {!isTestCompleted && (
                         <button
@@ -160,6 +173,8 @@ const Index = ({ lessonData, lessonTestsData, lessonFirstTestQuestionsAndAnswers
                             type='button'
                             className='outline-none border-none w-28 h-10 bg-Dark text-white font-nunito font-medium text-base rounded-md'
                         > Start Test </button>
+
+
                     )}
 
                     {/* Results */}
@@ -179,7 +194,7 @@ const Index = ({ lessonData, lessonTestsData, lessonFirstTestQuestionsAndAnswers
                     )}
 
 
-                    <span className='text-Dark font-nunito font-extrabold'> Science Verse </span>
+                    <span className='text-Dark font-nunito font-extrabold'> Astro Verse </span>
                 </div>
 
             </div>
@@ -315,15 +330,19 @@ const Index = ({ lessonData, lessonTestsData, lessonFirstTestQuestionsAndAnswers
                 </div>
             )}
 
-            <div className='hidden lg:inline-flex col-start-1 col-end-3 bg-Lightest flex-col items-center justify-start py-10 space-y-10 border-r border-gray-600'>
-                <Link href={`/`}>
+
+            {/* left sidebarrrrr */}
+            <div className='hidden lg:inline-flex col-start-1 col-end-3 bg-Lightest flex-col items-center justify-start py-10 space-y-10 border-r border-gray-600 overflow-x-hidden overflow-y-scroll scrollbar-hide'>
+                {/* LOGO */}
+                <Link href={`/`} className="flex flex-col space-y-2 justify-start items-center">
                     <Image
                         src={logoOne}
                         alt="logo"
                         width={100}
                         height={100}
-                        className="w-20 h-20"
+                        className="w-28 h-28 hover:scale-105"
                     />
+                    <h1 className='text-Brand font-extrabold text-3xl font-nunito text-center'> Astro Verse </h1>
                 </Link>
 
                 {!isTestCompleted && (
@@ -333,7 +352,8 @@ const Index = ({ lessonData, lessonTestsData, lessonFirstTestQuestionsAndAnswers
                             setIsTestModalOpen(true)
                         }}
                         type='button'
-                        className='outline-none border-none w-28 h-10 bg-Brand text-white font-nunito font-medium text-base rounded-md'
+                        className='outline-none border-none w-28 h-10
+                         bg-Brand text-white font-nunito font-medium text-base rounded-md'
                     > Start Test </button>
                 )}
 
@@ -365,27 +385,15 @@ const Index = ({ lessonData, lessonTestsData, lessonFirstTestQuestionsAndAnswers
 
             </div>
 
-
             <main className='col-span-full relative lg:col-start-3 lg:col-end-13 flex flex-col items-center justify-start bg-Brand'>
-                
-
-
-
-                    <iframe
-                        width={"100%"}
-                        className='w-full h-screen' id=""
-                        src={process.env.NEXT_PUBLIC_ROCKET_LESSON_METAVERSEID}
-                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; microphone; camera; display-capture; xr-spatial-tracking; xr;"
-                        allowFullScreen
-                    ></iframe>
-
-
-
-
-                {/* <iframe width=820 height=460 id="iframe" src="" allow="autoplay; fullscreen"></iframe> */}
-
-
-
+                {/* Embedding metaverse scence 1 from engine */}
+                <iframe
+                    width={"100%"}
+                    className='w-full h-screen' id=""
+                    src={lessonData?.lessonMetaverseID}
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; microphone; camera; display-capture; xr-spatial-tracking; xr;"
+                    allowFullScreen
+                ></iframe>
 
             </main>
         </>
