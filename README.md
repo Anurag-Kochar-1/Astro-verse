@@ -6,7 +6,7 @@
 ![TEST_AND_QUIZ](./SSimages/4.png)
 ![HOME](./SSimages/5.png)
 
-## Problem
+# Problem
 
 🚀 Traditional methods of learning about space 🚀, rockets 🚀, hovers 🚁, and telescopes 🔭, such as books 📚 and YouTube videos 📹, can be unengaging and tedious for students, resulting in limited opportunities for effective learning and making it challenging for them to comprehend new concepts.
 
@@ -14,7 +14,7 @@
 
 💡 To address this problem, there is a need to explore innovative and more interactive teaching methods, such as virtual reality simulations 🎮 and interactive workshops 🎓, that can create a more dynamic learning environment and engage students, leading to improved academic outcomes and a greater interest in the subject matter.
 
-## Solution
+# Solution
 
 🌐 To address the issue of unengaging and ineffective traditional learning methods for space-related concepts, we propose introducing an Open-World Metaverse, specifically designed for students.
 

@@ -76,14 +76,15 @@ const LeftSidebar = () => {
 
             <div className='hidden lg:inline-flex col-start-1 col-end-3 bg-Lightest flex-col items-center justify-between py-10 space-y-10 border-r border-gray-300'>
                 {/* LOGO */}
-                <Link href={`/`}>
+                <Link href={`/`} className="flex flex-col space-y-2 justify-start items-center">
                     <Image
                         src={logoOne}
                         alt="logo"
                         width={100}
                         height={100}
-                        className="w-28 h-28"
+                        className="w-28 h-28 hover:scale-105"
                     />
+                    <h1 className='text-Brand font-extrabold text-3xl font-nunito text-center'> Astro Verse </h1>
                 </Link>
 
                 {router.pathname !== "/subject/[subject]/lesson/[lessonID]" && (
