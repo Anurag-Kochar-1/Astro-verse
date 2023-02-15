@@ -11,12 +11,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        Brand: "#7148fc",
-        Darkest: "#0c121c",
-        Dark: "#1e293b",
-        Mid: "#b8bfc6",
-        Light: "#d6dee7",
-        Lightest: "#ffffff",
+        Brand: "#0EA5E9",
+        Darkest: "#0F172A",
+        Dark: "#37476c",
+        Mid: "#CBD5E1",
+        Light: "#e6ecf3",
+        Lightest: "#FFFFFF",
       },
       fontFamily: {
         nunito: ['var(--font-nunito)', ...fontFamily.sans],

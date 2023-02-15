@@ -23,7 +23,7 @@ const LessonCard = ({ lesson }: any) => {
 
             {lesson?.lessonLogo && (
                 <Image
-                    src={"https://firebasestorage.googleapis.com/v0/b/metaverse-for-learners.appspot.com/o/lessonLogos%2FBrain%20logo.png?alt=media&token=a269412e-0ea7-41e4-ac10-934fe072947e"}
+                    src={lesson.lessonLogos[Math.floor(Math.random() * 2)] || "https://firebasestorage.googleapis.com/v0/b/metaverse-for-learners.appspot.com/o/lessonLogos%2FGroup%2054.png?alt=media&token=34ccbec7-2daa-4552-9e78-1ac6004c38db"}
                     alt="lessonLogo"
                     width={100}
                     height={100}

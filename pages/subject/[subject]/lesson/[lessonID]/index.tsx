@@ -403,16 +403,16 @@ export default Index
 export async function getServerSideProps({ params }: any) {
     const { subject, lessonID } = params
 
-    const lessonRef = doc(db, "classes", "10", "subjects_2", `${subject}`, 'lessons_2', `${lessonID}`)
+    const lessonRef = doc(db, "classes", "10", "space_subjects", `rockets`, 'lessons', `${lessonID}`)
     const lessonRes = await getDoc(lessonRef)
     const lessonData = lessonRes.data() || null
 
 
-    const lessonTestsCollectionRef = collection(db, "classes", "10", "subjects_2", `${subject}`, 'lessons_2', `${lessonID}`, "tests_2")
+    const lessonTestsCollectionRef = collection(db, "classes", "10", "space_subjects", `rockets`, 'lessons', `${lessonID}`, "tests")
     const lessonTestsRes = await getDocs(lessonTestsCollectionRef)
     const lessonTestsData = lessonTestsRes?.docs?.map(doc => doc.data())
 
-    const lessonFirstTestQuestionsAndAnswersRef = doc(db, "classes", "10", "subjects_2", `${subject}`, 'lessons_2', `${lessonID}`, "tests_2", `${lessonTestsData[0]?.testID}`)
+    const lessonFirstTestQuestionsAndAnswersRef = doc(db, "classes", "10", "space_subjects", `rockets`, 'lessons', `${lessonID}`, "tests", `${lessonTestsData[0]?.testID}`)
     const lessonFirstTestQuestionsAndAnswersRes = await getDoc(lessonFirstTestQuestionsAndAnswersRef)
     const lessonFirstTestQuestionsAndAnswersData = lessonFirstTestQuestionsAndAnswersRes?.data() || null
 
