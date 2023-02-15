@@ -30,7 +30,7 @@ const LessonCard = ({ lesson }: any) => {
                     className="w-24 h-24"
                 />
             )}
-            <h6 className='font-nunito_sans text-lg text-Dark font-medium'>{lesson.lessonTitle}</h6>
+            <h6 className='font-nunito_sans text-sm sm:text-lg md:text-xl text-Dark font-bold'>{lesson.lessonTitle}</h6>
         </div>
     )
 }
