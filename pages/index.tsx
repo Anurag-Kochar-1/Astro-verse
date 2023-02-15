@@ -35,7 +35,7 @@ const subjectsArray = [
 
 export default function Home({ rocketData }: any) {
 
-  const [selectedSubject, setSelectedSubject] = useState<string>("biology")
+  const [selectedSubject, setSelectedSubject] = useState<string>("rockets")
   // const [selectedSubjectLessonsData, setSelectedSubjectLessonsData] = useState<any[]>(physicsData)
 
 
@@ -56,7 +56,7 @@ export default function Home({ rocketData }: any) {
         {/* Subjects Container*/}
         <div className='w-full flex flex-col justify-start items-start my-10'>
 
-          <h6 className='text-4xl text-Dark font-nunito font-bold'> Subjects</h6>
+          <h6 className='text-4xl text-Dark font-nunito font-bold'> Subjects </h6>
 
           <div className='w-full flex flex-wrap justify-start items-center my-5'>
             {subjectsArray?.map((subject) => {
