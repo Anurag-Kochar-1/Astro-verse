@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 const Index = () => {
 
   useEffect(() => {
-    router.push(`/subject/space_2/lesson/lbdhXTAbh81xU1x5iwY0`)
+    router.push(`/lesson/lbdhXTAbh81xU1x5iwY0`)
   }, [])
   
 

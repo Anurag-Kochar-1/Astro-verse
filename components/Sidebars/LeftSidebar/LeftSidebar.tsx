@@ -57,6 +57,7 @@ const LeftSidebar = () => {
 
 
     if (router.pathname == "/subject/[subject]/lesson/[lessonID]") return null
+    if (router.pathname == "/lesson/[lessonID]") return null
 
     return (
         <>

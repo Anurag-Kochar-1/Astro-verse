@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '@/styles/Home.module.css'
 import Header from '@/components/Header/Header'
-import { collection, getDocs } from 'firebase/firestore'
+import { collection, doc, getDoc, getDocs } from 'firebase/firestore'
 import { db } from '@/firebaseConfig'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -33,7 +33,7 @@ const subjectsArray = [
 ]
 
 
-export default function Home({ rocketData }: any) {
+export default function Home({ rocketData, lessonTestsData , lessonFirstTestQuestionsAndAnswersData, lessonData}: any) {
 
   const [selectedSubject, setSelectedSubject] = useState<string>("rockets")
   // const [selectedSubjectLessonsData, setSelectedSubjectLessonsData] = useState<any[]>(physicsData)
@@ -78,7 +78,11 @@ export default function Home({ rocketData }: any) {
         <div className='w-full flex flex-col justify-start items-start my-10'>
 
           <span className='w-full'>
-            <span onClick={() => console.log(rocketData)} className='text-4xl text-Dark font-nunito font-bold '> <span className='text-4xl text-Brand font-nunito font-bold'> MetaVerse </span> Classes - {selectedSubject} </span>
+            <span onClick={() =>{
+               console.log(lessonData)
+               console.log(lessonTestsData)
+               console.log(lessonFirstTestQuestionsAndAnswersData)
+            }} className='text-4xl text-Dark font-nunito font-bold '> <span className='text-4xl text-Brand font-nunito font-bold'> MetaVerse </span> Classes - {selectedSubject} </span>
 
           </span>
 
@@ -86,13 +90,13 @@ export default function Home({ rocketData }: any) {
 
             <div className='w-full flex flex-col items-center justify-start space-y-3'>
               {rocketData?.map((lesson: any) => {
-                return <LessonCard key={lesson.lessonID} lesson={lesson} />
+                return <LessonCard key={lesson?.lessonID} lesson={lesson} />
               })}
             </div>
 
             <div className='w-full flex flex-col items-center justify-start space-y-3'>
               {rocketData?.map((lesson: any) => {
-                return <LessonCard key={lesson.lessonID} lesson={lesson} />
+                return <LessonCard key={lesson?.lessonID} lesson={lesson} />
               })}
             </div>
 
@@ -116,25 +120,27 @@ export default function Home({ rocketData }: any) {
 
 export async function getServerSideProps() {
 
-  // Getting Physics lessons -> class 10th
-  // const physicsLessonsCollectionRef = collection(db, `classes/10/subjects/physics/lessons`)
-  // const physicsRes = await getDocs(physicsLessonsCollectionRef)
-  // const physicsData = physicsRes?.docs?.map(doc => doc.data())
-
-  // Getting Chemistry lessons -> class 10th
-  // const chemistryLessonsCollectionRef = collection(db, `classes/10/subjects/chemistry/lessons`)
-  // const chemistryRes = await getDocs(chemistryLessonsCollectionRef)
-  // const chemistryData = chemistryRes?.docs?.map(doc => doc.data())
-
-
-  // Getting Biology lessons -> class 10th
+  // Getting rocket lessons -> class 10th
   const rocketLessonsCollectionRef = collection(db, `classes/10/space_subjects/rockets/lessons`)
   const rocketRes = await getDocs(rocketLessonsCollectionRef)
   const rocketData = rocketRes?.docs?.map(doc => doc.data())
 
 
+  const lessonRef = doc(db, "classes", "10", "space_subjects", `rockets`, 'lessons', `lbdhXTAbh81xU1x5iwY0`)
+  const lessonRes = await getDoc(lessonRef)
+  const lessonData = lessonRes.data() || null
+
+
+  const lessonTestsCollectionRef = collection(db, "classes", "10", "space_subjects", `rockets`, 'lessons', `lbdhXTAbh81xU1x5iwY0`, "tests")
+  const lessonTestsRes = await getDocs(lessonTestsCollectionRef)
+  const lessonTestsData = lessonTestsRes?.docs?.map(doc => doc.data())
+
+  const lessonFirstTestQuestionsAndAnswersRef = doc(db, "classes", "10", "space_subjects", `rockets`, 'lessons', `lbdhXTAbh81xU1x5iwY0`, "tests", `KyEwJIYs3CW9Kcqf9RyU`)
+  const lessonFirstTestQuestionsAndAnswersRes = await getDoc(lessonFirstTestQuestionsAndAnswersRef)
+  const lessonFirstTestQuestionsAndAnswersData = lessonFirstTestQuestionsAndAnswersRes?.data() || null
+
 
   return {
-    props: { rocketData }
+    props: { rocketData, lessonTestsData, lessonFirstTestQuestionsAndAnswersData, lessonData }
   }
 }

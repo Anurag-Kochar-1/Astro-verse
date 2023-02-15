@@ -3,12 +3,12 @@ import { auth, db } from '@/firebaseConfig'
 import { arrayUnion, collection, doc, getDoc, getDocs, increment, updateDoc } from 'firebase/firestore'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import logoOne from "../../../../../public/images/logos/logoOne.png"
+import logoOne from "../../public/images/logos/logoOne.png"
 import Link from 'next/link'
 
-import WaitEmoji from "../../../../../public/images/LessonOnBoarding/WaitEmoji.png"
-import ClickOn3dModelsEmoji from "../../../../../public/images/LessonOnBoarding/ClickOn3dModelsEmoji.png"
-import StartTestEmoji from "../../../../../public/images/LessonOnBoarding/StartTestEmoji.png"
+import WaitEmoji from "../../public/images/LessonOnBoarding/WaitEmoji.png"
+import ClickOn3dModelsEmoji from "../../public/images/LessonOnBoarding/ClickOn3dModelsEmoji.png"
+import StartTestEmoji from "../../public/images/LessonOnBoarding/StartTestEmoji.png"
 
 // icons
 import { IoCloseSharp } from "react-icons/io5"
@@ -16,7 +16,8 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import { toast } from 'react-toastify'
 import { RxCross1, RxHamburgerMenu } from 'react-icons/rx'
 
-const Index = ({ lessonData, lessonTestsData, lessonFirstTestQuestionsAndAnswersData }: any) => {
+const index = ({ lessonData, rocketData, lessonTestsData, lessonFirstTestQuestionsAndAnswersData }: any) => {
+
     const [user, loading, error] = useAuthState(auth)
     const router = useRouter()
 
@@ -397,39 +398,35 @@ const Index = ({ lessonData, lessonTestsData, lessonFirstTestQuestionsAndAnswers
 
             </main>
         </>
-
     )
 }
 
-export default Index
+export default index
+
+export async function getServerSideProps() {
 
 
+    // Getting rocket lessons -> class 10th
+    const rocketLessonsCollectionRef = collection(db, `classes/10/space_subjects/rockets/lessons`)
+    const rocketRes = await getDocs(rocketLessonsCollectionRef)
+    const rocketData = rocketRes?.docs?.map(doc => doc.data())
 
 
-
-
-export async function getServerSideProps({ params }: any) {
-    const { subject, lessonID } = params
-
-    const lessonRef = doc(db, "classes", "10", "space_subjects", `${subject}`, 'lessons', `${lessonID}`)
+    const lessonRef = doc(db, "classes", "10", "space_subjects", `rockets`, 'lessons', `lbdhXTAbh81xU1x5iwY0`)
     const lessonRes = await getDoc(lessonRef)
     const lessonData = lessonRes.data() || null
 
 
-    const lessonTestsCollectionRef = collection(db, "classes", "10", "space_subjects", `${subject}`, 'lessons', `${lessonID}`, "tests")
+    const lessonTestsCollectionRef = collection(db, "classes", "10", "space_subjects", `rockets`, 'lessons', `lbdhXTAbh81xU1x5iwY0`, "tests")
     const lessonTestsRes = await getDocs(lessonTestsCollectionRef)
     const lessonTestsData = lessonTestsRes?.docs?.map(doc => doc.data())
 
-    const lessonFirstTestQuestionsAndAnswersRef = doc(db, "classes", "10", "space_subjects", `${subject}`, 'lessons', `${lessonID}`, "tests", `KyEwJIYs3CW9Kcqf9RyU`)
+    const lessonFirstTestQuestionsAndAnswersRef = doc(db, "classes", "10", "space_subjects", `rockets`, 'lessons', `lbdhXTAbh81xU1x5iwY0`, "tests", `KyEwJIYs3CW9Kcqf9RyU`)
     const lessonFirstTestQuestionsAndAnswersRes = await getDoc(lessonFirstTestQuestionsAndAnswersRef)
     const lessonFirstTestQuestionsAndAnswersData = lessonFirstTestQuestionsAndAnswersRes?.data() || null
 
-    return {
-        props: {
-            lessonData,
-            lessonTestsData,
-            lessonFirstTestQuestionsAndAnswersData
-        }
-    }
 
+    return {
+        props: { lessonData, rocketData, lessonTestsData, lessonFirstTestQuestionsAndAnswersData }
+    }
 }

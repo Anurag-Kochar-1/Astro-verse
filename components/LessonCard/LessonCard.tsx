@@ -14,7 +14,7 @@ const LessonCard = ({ lesson }: any) => {
         <div
             onClick={() => {
                 if (user) {
-                    router.push(`/subject/${lesson.lessonSubject}/lessons/${lesson.lessonID}`)
+                    router.push(`/lesson/${lesson?.lessonID}`)
                 } else if (!user) {
                     alert("Sign in first")
                 }
