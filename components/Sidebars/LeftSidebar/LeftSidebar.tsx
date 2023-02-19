@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 import logoOne from "../../../public/images/logos/logoOne.png"
 import Link from 'next/link'
@@ -11,6 +11,9 @@ import { IoSettingsOutline } from "react-icons/io5"
 import { IoMdNotificationsOutline } from "react-icons/io"
 import { useRouter } from 'next/router'
 import ProfileCard from '../RightSidebar/ProfileCard'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { auth, db } from '@/firebaseConfig'
+import { doc, getDoc } from 'firebase/firestore'
 
 const navLinks = [
     {
@@ -49,11 +52,26 @@ const navLinks = [
 
 
 const LeftSidebar = () => {
+    const [user] = useAuthState(auth)
     const router = useRouter()
     const [isProfileCardOpen, setIsProfileCardOpen] = useState<boolean>(false)
+    const [userCoins, setUserCoins] = useState<number>(100)
 
     const profileCardContainerRef = useRef<HTMLDivElement | null>(null)
     const profileCardRef = useRef<HTMLDivElement | null>(null)
+
+    const getUserCoins = async () => {
+        console.log(`getUserCoins is running`)
+        const userRef = doc(db, 'users', user?.uid as string)
+        const res = await getDoc(userRef)
+        setUserCoins(res?.data()?.userCoins)
+    }
+
+    useEffect(() => {
+        if (user && userCoins == 0) {
+            getUserCoins()
+        }
+    }, [user])
 
 
     if (router.pathname == "/subject/[subject]/lesson/[lessonID]") return null
@@ -68,7 +86,18 @@ const LeftSidebar = () => {
                         // console.log(e.target)
                         if (e.target !== profileCardRef.current) setIsProfileCardOpen(false)
                     }}>
-                    <div ref={profileCardRef} className='z-50 w-[90%] h-[50vh] sm:w-[60%] md:w-[40%] lg:w-[30%] lg:h-[40vh] bg-Lightest rounded-md flex flex-col items-center justify-start'>
+                    <div ref={profileCardRef} className='z-50 w-[90%] h-[50vh] sm:w-[60%] md:w-[40%] lg:w-[30%] lg:h-[40vh] bg-Lightest rounded-md flex flex-col items-center justify-center p-4 space-y-5'>
+
+                        <Image
+                            src={user?.photoURL as string}
+                            alt={"user DP"}
+                            width={200}
+                            height={200}
+                            className={"w-32 h-32 rounded-full"}
+                        />
+
+                        <h5 className='text-Brand font-bold text-3xl'> {user?.displayName} </h5>
+                        <p className='text-Dark font-medium text-3xl'> {userCoins} Coins </p>
 
                     </div>
                 </div>
@@ -95,7 +124,9 @@ const LeftSidebar = () => {
                                 return (
                                     <Link
                                         onClick={() => {
-                                            if (item.name === "Profile") setIsProfileCardOpen(true)
+                                            if (item.name === "Profile" && user) {
+                                                setIsProfileCardOpen(true)
+                                            }
                                         }}
                                         key={item.id}
                                         href={item.link}
