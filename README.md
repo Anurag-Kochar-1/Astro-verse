@@ -3,8 +3,8 @@
 ![Class_1](./SSimages/1.png)
 ![Class_2](./SSimages/2.png)
 ![Class_3](./SSimages/3.png)
-![TEST_AND_QUIZ](./SSimages/4.png)
-![HOME](./SSimages/5.png)
+![TEST_AND_QUIZ_MODAL](./SSimages/4.png)
+![HOME_page](./SSimages/5.png)
 
 # Problem
 

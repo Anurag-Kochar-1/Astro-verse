@@ -2,3 +2,8 @@
   "extends": "next/core-web-vitals",
   "react/no-unescaped-entities": "off"
 }
+
+// OLD
+// {
+//   "extends": "next/core-web-vitals",
+// }
