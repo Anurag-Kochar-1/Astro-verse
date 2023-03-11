@@ -8,6 +8,7 @@ import { SignInWithGoogleFunction } from '@/utils/SignInWithGoogle'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth } from '@/firebaseConfig'
 import ProfileCard from '../Sidebars/RightSidebar/ProfileCard'
+import Button from '../Button/Button'
 
 
 const Header = () => {
@@ -28,13 +29,11 @@ const Header = () => {
       <SearchBar />
 
       {!user && (
-        <button
+        <Button
           onClick={SignInWithGoogleFunction}
-          type='button'
-          title='signIn'
-          className='lg:hidden outline-none border-none w-28 h-10 bg-Brand text-white font-nunito font-semibold text-base rounded-md'>
+        >
           Sign in
-        </button>
+        </Button>
       )}
 
       {/* Sidebar */}
